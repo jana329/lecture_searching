@@ -1,4 +1,7 @@
 import os
+import json
+
+from generators import dna_sequence
 
 # get current working directory path
 cwd_path = os.getcwd()
@@ -13,8 +16,17 @@ def read_data(file_name, field):
     """
     file_path = os.path.join(cwd_path, file_name)
 
+    with open(file_path, "r", encoding='utf-8') as file:
+        data = json.load(file)
+
+    if field not in data:
+        return None
+
+    return data[field]
+
 
 def main():
+    print(read_data('sequential.json', 'dna_sequence'))
     pass
 
 
