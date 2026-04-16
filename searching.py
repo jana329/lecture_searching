@@ -24,9 +24,24 @@ def read_data(file_name, field):
 
     return data[field]
 
+def linear_search(sequence, target):
+    positions = []
+
+    for index, value in enumerate(sequence):
+        if value == target:
+            positions.append(index)
+
+    return {
+        'positons': positions,
+        'count': len(positions)
+    }
+
 
 def main():
-    print(read_data('sequential.json', 'dna_sequence'))
+    nactena_data = read_data('sequential.json', 'unordered_numbers')
+    print(nactena_data)
+    vysledek = linear_search(nactena_data, target=5)
+    print(vysledek)
     pass
 
 
