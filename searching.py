@@ -1,5 +1,9 @@
 import os
 import json
+import time
+import random
+import matplotlib.pyplot as plt
+from bisect import bisect_left
 
 from generators import dna_sequence
 
@@ -54,6 +58,10 @@ def binary_search(sequence, target):
 
     return None
 
+
+
+
+
 def main():
     nactena_data = read_data('sequential.json', 'ordered_numbers')
     print(nactena_data)
@@ -63,6 +71,26 @@ def main():
 
     binarni = binary_search(nactena_data, target=13)
     print(binarni)
+
+    velikosti = [100, 500, 1000, 10000]
+    cas_sequence = []
+
+    for n in velikosti:
+        data = list(range(n))
+        cil = -1
+
+        start = time.perf_counter()
+        linear_search(data, cil)
+        konec = time.perf_counter()
+
+        cas_sequence.append(konec - start)
+
+    plt.plot(velikosti, cas_sequence, label="linear search")
+    plt.xlabel("velikost")
+    plt.ylabel("cas")
+    plt.title("Srovnání")
+    plt.legend()
+    plt.show()
     pass
 
 
