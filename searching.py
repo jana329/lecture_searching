@@ -36,13 +36,35 @@ def linear_search(sequence, target):
         'count': len(positions)
     }
 
+def binary_search(sequence, target):
+    levy = 0
+    pravy = len(sequence) - 1
+
+    while levy <= pravy:
+        stred = (levy + pravy) // 2
+
+        if sequence[stred] == target:
+            return stred
+
+        elif sequence[stred] < target:
+            levy = stred + 1
+
+        else:
+            pravy = stred - 1
+
+    return None
 
 def main():
-    nactena_data = read_data('sequential.json', 'unordered_numbers')
+    nactena_data = read_data('sequential.json', 'ordered_numbers')
     print(nactena_data)
+
     vysledek = linear_search(nactena_data, target=5)
     print(vysledek)
+
+    binarni = binary_search(nactena_data, target=13)
+    print(binarni)
     pass
+
 
 
 if __name__ == '__main__':
