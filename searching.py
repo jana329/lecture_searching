@@ -59,6 +59,24 @@ def binary_search(sequence, target):
     return None
 
 
+def pattern_search(sequence, pattern):
+
+    pozice = set()
+
+    if not sequence or not pattern:
+        return pozice
+
+    n = len(sequence)
+    m = len(pattern)
+
+    if m > n:
+        return pozice
+
+    for i in range(n - m + 1):
+        if sequence[i:i + m] == pattern:
+            pozice.add(i)
+
+    return pozice
 
 
 
@@ -71,6 +89,18 @@ def main():
 
     binarni = binary_search(nactena_data, target=13)
     print(binarni)
+
+    dna_sekvence = read_data('sequential.json', 'dna_sequence')
+
+    if dna_sekvence is not None:
+        vzor = "ATA"
+        pozice_vzoru = pattern_search(dna_sekvence, vzor)
+
+        print(f"Hledaný vzor: '{vzor}'")
+        print(f"Sekvence: '{dna_sekvence}'")
+        print(f"Nalezeno na indexech (množina): {pozice_vzoru}")
+    else:
+        print("Klíč 'dna_sequence' nebyl v souboru nalezen.")
 
     velikosti = [100, 500, 1000, 10000]
     cas_sequence = []
